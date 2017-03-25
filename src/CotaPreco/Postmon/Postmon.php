@@ -46,11 +46,7 @@ class Postmon implements PostmonInterface
     public function __construct(ClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?: new Client([
-            'base_url' => [
-                self::API_ENDPOINT_URL, [
-                    'version' => self::API_VERSION
-                ]
-            ]
+            'base_uri' => 'http://api.postmon.com.br/v1/'
         ]);
     }
 
@@ -60,7 +56,7 @@ class Postmon implements PostmonInterface
     public function findAddressByCep(Cep $cep)
     {
         try {
-            $request = new Request('GET', 'http://api.postmon.com.br/v1/cep/' . $cep);
+            $request = new Request('GET', 'cep/' . $cep);
 
             $response = $this->httpClient->send($request);
 
